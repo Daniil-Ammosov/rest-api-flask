@@ -86,7 +86,6 @@ def find_id(a):
     n = cursor.fetchone()
     n = n[0]
     a = int(a)
-    print(a, n)
     if a > 0:
         if a < n or a == n:
             return True
