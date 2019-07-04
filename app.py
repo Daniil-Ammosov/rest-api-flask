@@ -147,7 +147,7 @@ def main_back():
 ##################################################################################################
 @app.route('/api/articles/<id>', methods=["GET"])
 def get_art(id):
-    if find_id(int(id)) == True:
+    if find_id(int(id)):
         response = app.response_class(
             response=json.dumps(read_db_id(id)),
             status=200,
@@ -166,7 +166,7 @@ def get_art(id):
 
 @app.route('/api/articles/<id>', methods=["PUT","PATCH"])
 def upd_art(id):
-    if find_id(int(id)) == True:
+    if find_id(int(id)):
         if request.is_json:
             f = request.get_json()
             update_db(id, f["author"], f["content"])
@@ -190,7 +190,7 @@ def upd_art(id):
 
 @app.route('/api/articles/<id>', methods=["DELETE"])
 def del_art(id):
-    if find_id(int(id)) == True:
+    if find_id(int(id)):
         del_db(id)
         response = app.response_class(
             response=json.dumps({"message": "ok"}),
