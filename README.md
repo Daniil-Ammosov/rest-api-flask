@@ -8,6 +8,10 @@
   --------
   pip install flask - установка фреймворка Flask
   
+  Как скачать?
+  --------
+  git clone https://github.com/Daniil-Ammosov/rest-api-flask.git
+  
   Как запустить?
   --------
   Перейдите в репозиторий из консоли, далее запустите файл app.py:
