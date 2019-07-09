@@ -188,6 +188,8 @@ def upd_art(id):
             else:
                 if "content" in f:
                     update_db(id, None, f["content"])
+                else:
+                    update_db(id, None, None)
             response = app.response_class(
                 response=json.dumps(read_db_id(int(id))),
                 status=200,
