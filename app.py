@@ -42,15 +42,15 @@ def write_db(a, b):
 def update_db ( id, a, b):
     db = lite.connect("data.db3")
     cursor = db.cursor()
-    if a !="":
-        if b != "":
+    if a != None:
+        if b != None:
             cursor.execute("UPDATE Article SET author = ?, content = ?,updated = ?  WHERE id = ?",
                            (a, b, datetime.now(), id))
         else:
             cursor.execute("UPDATE Article SET author = ?,updated = ?  WHERE id = ?",
                            (a, datetime.now(), id))
     else:
-        if b != "":
+        if b != None:
             cursor.execute("UPDATE Article SET content = ?,updated = ?  WHERE id = ?",
                            (b, datetime.now(), id))
         else:
@@ -169,7 +169,16 @@ def upd_art(id):
     if find_id(int(id)):
         if request.is_json:
             f = request.get_json()
-            update_db(id, f["author"], f["content"])
+            if "author" in f:
+                if "content" in f:
+                    update_db(id, f["author"], f["content"])
+                else:
+                    update_db(id, f["author"], None)
+            else:
+                if "content" in f:
+                    update_db(id, None, f["content"])
+                else:
+                    update_db(id, None, None)
             response = app.response_class(
                 response=json.dumps(read_db_id(int(id))),
                 status=200,
