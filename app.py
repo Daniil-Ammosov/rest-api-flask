@@ -126,8 +126,8 @@ def main():
 def main_back():
     if request.is_json:
         f = request.get_json()
-        if f["author"] !="":
-            if f["content"] !="":
+        if "author" in f:
+            if "content" in f:
                 write_db(f["author"], f["content"])
                 response = app.response_class(
                     response=json.dumps(read_db_id("max")),
